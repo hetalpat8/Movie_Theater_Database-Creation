@@ -1,0 +1,44 @@
+CREATE TABLE customer(
+	customer_id SERIAL PRIMARY KEY, 
+	first_name VARCHAR(50),
+	last_name VARCHAR(50),
+	payment_info VARCHAR(175)
+);
+
+CREATE TABLE concession(
+	movie_concession_voucher SERIAL PRIMARY KEY,
+	concession_id INTEGER,
+	concession_type VARCHAR(125),
+	concession_cost NUMERIC(8,2),
+	customer_id INTEGER NOT NULL,
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id)
+);
+
+CREATE TABLE catalog_(
+	barcode_number SERIAL PRIMARY KEY,
+	wholesale_price NUMERIC(8,2)
+);	
+
+CREATE TABLE transaction_(
+	transaction_id SERIAL PRIMARY KEY,
+	ticket_cost NUMERIC(8,2),
+	barcode_number INTEGER NOT NULL, 
+	FOREIGN KEY(barcode_number) REFERENCES catalog_(barcode_number)
+);
+
+CREATE TABLE movie(
+	movie_id SERIAL PRIMARY KEY,
+	movie_concession_voucher INTEGER NOT NULL,
+	barcode_number INTEGER NOT NULL,
+	FOREIGN KEY(movie_concession_voucher) REFERENCES concession(movie_concession_voucher),
+	FOREIGN KEY(barcode_number) REFERENCES catalog_(barcode_number)
+);
+
+CREATE TABLE ticket(
+	ticket_id SERIAL PRIMARY KEY,
+	customer_id INTEGER NOT NULL,
+	transaction_id INTEGER NOT NULL,
+	FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
+	FOREIGN KEY(transaction_id) REFERENCES transaction_(transaction_id)
+);
+	

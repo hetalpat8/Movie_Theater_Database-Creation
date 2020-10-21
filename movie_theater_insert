@@ -1,0 +1,66 @@
+INSERT INTO customer(
+	customer_id,
+	first_name,
+	last_name,
+	payment_info
+)VALUES(
+	1,
+	'Hetal',
+	'Patel',
+	'5685-4785-4768-2994 732 08/21'
+);
+ 
+INSERT INTO concession(
+	movie_concession_voucher,
+	concession_id,
+	concession_type,
+	concession_cost,
+	customer_id
+)VALUES(
+	1,
+	1,
+	'Popcorn',
+	25.00,
+	1
+);
+
+INSERT INTO catalog_(
+	barcode_number,
+	wholesale_price
+)VALUES(
+	1,
+	900.00
+);
+
+INSERT INTO movie(
+	movie_id,
+	movie_concession_voucher,
+	barcode_number
+	
+)VALUES(
+	1,
+	1,
+	1
+);
+
+INSERT INTO transaction_(
+	transaction_id,
+	ticket_cost,
+	barcode_number
+	
+)VALUES(
+	1,
+	18.00,
+	1
+);
+
+
+INSERT INTO ticket(
+	ticket_id,
+	customer_id,
+	transaction_id
+)VALUES(
+	1,
+	1,
+	1
+);
